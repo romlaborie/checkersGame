@@ -1,5 +1,5 @@
 import ia
-
+import tkinter as Tk
 #probleme pour l'interaction : l'IA veut toujours commecner
 #cleaner
 #définir le gagnant
