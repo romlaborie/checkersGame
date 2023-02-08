@@ -28,8 +28,9 @@ class pionsEmplacements():
         self.dame_noire = (1, True)
         self.dame_blanche = (0, True)
         self.automatique=ia.AI()
-        self.ordiDebute = random.randint(0, 1)
+        # self.ordiDebute = random.randint(0, 1)
 
+        self.ordiDebute = 0
     def damier_trace(self, case=40):
         [[(self.can1.create_rectangle(j * case, i * case, (j * case) + case, (i * case) + case, fill='darkmagenta') if (
                                                                                                                                    j % 2) == 0 else self.can1.create_rectangle(
@@ -68,11 +69,11 @@ class pionsEmplacements():
     def CasesToPlateau(self):
 
         plateau=[None]
-        plateau.extend((1,False) for k in range(20))
-        plateau.extend(None for p in range(10))
-        plateau.extend((0,False) for k in range(20))
-        for k in range(51):
-
+        plateau.extend([(1,False) for k in range(20)])
+        plateau.extend([None for p in range(10)])
+        plateau.extend([(0,False) for k in range(20)])
+        for k in range(50):
+            print(k)
             if self.cases_noires[k] in self.dame_blanches:
 
                 plateau[k+1]=self.dame_blanche
@@ -92,10 +93,11 @@ class pionsEmplacements():
                 plateau[k+1]=None
         return plateau
 
-    def PlateauToCases(self, Tuple=(None, None)):
+    def PlateauToCases(self, TupleMouvement=(None, None)):
 
         #Appel au tuple de l'IA
-        TupleMouvement = self.automatique.play(self.CasesToPlateau(), self.ordiDebute)
+        if TupleMouvement == (None, None) :
+            TupleMouvement = self.automatique.play(self.CasesToPlateau(), self.ordiDebute)
         if self.ordiDebute:
 
             self.pions_blancs.remove(self.cases_noires[TupleMouvement[0]-1])

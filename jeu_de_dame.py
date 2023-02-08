@@ -44,14 +44,14 @@ class JeuDeDame():
         if self.Joueur!=self.ordiJoueur.joueur_IA and self.selected == -1:
             if num_case in pions:
                 self.selected = num_case
-            print("coucou", num_case)
-            self.ordiJoueur.possibilitees(self.plateau, pions.index(num_case)+1)
+            print("coucou", self.emplacementGrille.cases_noires.index(num_case)+1)
+            self.ordiJoueur.possibilitees(self.plateau, self.emplacementGrille.cases_noires.index(num_case)+1)
             print("DAME.....", self.emplacementGrille.dame_noires, self.emplacementGrille.dame_blanches)
         print(self.selected)
         if self.Joueur!=self.ordiJoueur.joueur_IA :
 
             print("dest = ", num_case)
-
+            print(self.ordiJoueur.pos)
             if self.emplacementGrille.cases_noires.index(num_case)+1 in self.ordiJoueur.pos:
 
                 initial_position= self.emplacementGrille.cases_noires.index(self.selected)+1

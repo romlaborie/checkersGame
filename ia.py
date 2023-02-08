@@ -340,10 +340,11 @@ class AI():
                 c2 = c + 5
                 print(c)
                 self.CheckAttaquePossibleBlanc(plateau, c2, c)
-        self.pionsAPrendre = self.prenable
+        self.pionsAPrendre = list(self.prenable)
         self.prenable.extend(self.pos)
 
         print("prenable = ", self.prenable)
+        print("pos = ", self.pos)
 
         return self.prenable
 
