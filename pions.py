@@ -5,16 +5,15 @@ import ia
 
 class pionsEmplacements():
 
-    def __init__(self, currentPlayer):
+    def __init__(self):
 
         self.ordiJoueur = ia.AI()
         self.fenetre = Tk.Tk()
         self.fenetre.title("Jeu de Dame")
-        self.chaine = Tk.Label(self.fenetre)
         self.txt1 = Tk.Label(self.fenetre, text='')
         self.txt2 = Tk.Label(self.fenetre, text='')
         self.can1 = Tk.Canvas(self.fenetre, width=400, height=400, bg='dark grey')
-        self.Joueur = currentPlayer
+        self.Joueur = 0
         self.noirScore = 0
         self.blancScore = 0
         self.dame_noires=list()
@@ -23,8 +22,9 @@ class pionsEmplacements():
         self.pions_blancs= [61, 63, 65, 67, 69, 70, 72, 74, 76, 78, 81, 83, 85, 87, 89, 90, 92, 94, 96, 98]
         self.cases_noires = list()
         self.cases_noires.extend(self.pions_noirs)
-        self.cases_noires.extend(self.pions_blancs)
         self.cases_noires.extend([41, 43, 45, 47, 49, 50, 52, 54, 56, 58])
+        self.cases_noires.extend(self.pions_blancs)
+
         self.dame_noire = (1, True)
         self.dame_blanche = (0, True)
         self.automatique=ia.AI()
@@ -44,10 +44,6 @@ class pionsEmplacements():
 
         self.txt1.configure(text='Blanc = ' + str(self.blancScore))
         self.txt2.configure(text='Noir = ' + str(self.noirScore))
-        if self.Joueur == 1:
-            self.chaine.configure(text="Les noirs jouent...", fg='black')
-        else:
-            self.chaine.configure(text="Les blancs jouent...", fg='black')
 
         self.placement_init(self.pions_noirs, "SlateGray2")
 
@@ -96,7 +92,7 @@ class pionsEmplacements():
                 plateau[k+1]=None
         return plateau
 
-    def PlateauToCases(self):
+    def PlateauToCases(self, Tuple=(None, None)):
 
         #Appel au tuple de l'IA
         TupleMouvement = self.automatique.play(self.CasesToPlateau(), self.ordiDebute)
@@ -165,6 +161,8 @@ class pionsEmplacements():
 
                 self.dame_noires.remove(self.cases_noires[TupleMouvement[0] - 1])
                 self.dame_noires.append(self.cases_noires[TupleMouvement[1] - 1])
+            self.damier_trace()
+            self.place_pions()
 
         #ajout des dames si la dame n'existe pas et si on est au bord du tableau (l'une des 5 dernieres appartient à self.noirs)
 
