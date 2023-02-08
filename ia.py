@@ -6,6 +6,7 @@ class AI():
 
         self.pos = list()
         self.prenable = list()
+        self.pionsAPrendre=list()
         self.joueur_IA=0
         self.case =40
         self.moves_possible = list()
@@ -19,9 +20,9 @@ class AI():
             if plateau[i] != None and plateau[i][0]==joueur:
                 print(plateau)
                 self.moves_possible = self.possibilitees(plateau, i)
-                self.pos.extend(self.moves_possible)
+
                 print(self.pos)
-                if len(self.prenable) > 0:
+                if len(self.pionsAPrendre) > 0:
                     for k in range(10):
                         listeRetour.append(self.moves_possible)
                     self.pionsABouger.extend([i for k in range(10)])
@@ -47,8 +48,8 @@ class AI():
         print(i)
         selection = self.pionsABouger[i]
         if self.pionsABouger.count(self.pionsABouger[i])>=10:
-            self.possibilitees(plateau, selection) #recalcule self.prenable
-            print("prenable =  ", self.prenable)
+            self.possibilitees(plateau, selection) #recalcule self.pionsAPrendre
+            print("pionsAPrendre =  ", self.pionsAPrendre)
 
         self.moves_possible = listeDeCasesPossibles[i]
         if selection%10 == 5 and plateau[selection][0]==1:
@@ -115,7 +116,7 @@ class AI():
     def possibilitees(self, plateau, num_selected):
         self.pos=[]
         self.prenable=[]
-        
+        self.pionsAPrendre=[]
         print(num_selected)
         # on évalue les positions autorisées
         #attention à 6 puis 5
@@ -339,6 +340,8 @@ class AI():
                 c2 = c + 5
                 print(c)
                 self.CheckAttaquePossibleBlanc(plateau, c2, c)
+        self.pionsAPrendre = self.prenable
+        self.prenable.extend(self.pos)
 
         print("prenable = ", self.prenable)
 
