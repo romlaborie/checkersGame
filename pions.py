@@ -121,3 +121,90 @@ class pionsEmplacements():
 
         #mettre à jour self.cases_noires
 
+    def PionMange(self, dest, listePionsAManger, listePionsARafraichir, selection):
+        print("destination ", dest)
+        print("selection ", selection)
+        listePionsAManger[listePionsAManger.index((dest+selection)//2)]=-1
+
+        listePionsARafraichir[listePionsARafraichir.index(selection)] = dest
+
+    def deplacementPionBlanc(self, dest, selection):
+
+        self.pions_b[self.pions_b.index(selection)] = dest
+
+    def deplacementPionNoir(self, dest, selectJoueur):
+        selection =  selectJoueur
+        self.pions_n[self.pions_n.index(selection)] = dest
+
+    def deplacementDameBlanc(self, dest, selectJoueur):
+        selection = selectJoueur
+        if selection in self.dame_b:
+
+            self.dame_b[self.dame_b.index(selection)] = dest
+        else :
+            self.creationDameBlanche(dest)
+
+    def deplacementDameNoir(self, dest, selectJoueur):
+        selection = selectJoueur
+        if selection in self.dame_n:
+
+            self.dame_n[self.dame_n.index(selection)] = dest
+        else:
+            self.creationDameNoire(dest)
+
+    def creationDameNoire(self, dest):
+        self.dame_n.append(dest)
+
+    def creationDameBlanche(self, dest):
+        self.dame_b.append(dest)
+
+    def deplacement(self, dest, selection):
+
+        ligne = dest // 10
+        print("prenable = ", self.prenable)
+        print("dest = ", dest)
+        self.prenable.extend(self.pos)
+        if dest in self.prenable:
+            if selection in self.pions_b:
+                print("diff =", dest-selection)
+                if abs(dest-selection) > 11:
+                    print("jesuislàetmangenoir")
+                    self.PionMange(dest, self.pions_n, self.pions_b, selection)
+                    self.blanc+=1
+                else:
+                    print("jesuislà")
+                    self.deplacementPionBlanc(dest, selection)
+                if ligne == 9 :
+                    self.creationDameBlanche(dest)
+
+            elif selection in self.pions_n:
+                print("diff =", dest - selection)
+                if abs(dest-selection)>11:
+                    print("jesuislàetmangeblanc")
+                    self.PionMange(dest, self.pions_b, self.pions_n, selection)
+                    self.noir+=1
+                else:
+                    print("jesuisicietnoir")
+                    self.deplacementPionNoir(dest, selection)
+                if ligne == 0 :
+                    self.creationDameNoire(dest)
+            if selection in self.dame_b:
+                if abs(dest-selection) >11:
+                    self.PionMange(dest, self.pions_n, self.dame_b, selection)
+                    self.blanc+=1
+                else:
+                    self.deplacementDameBlanc(dest, selection)
+            elif selection in self.dame_n:
+                if abs(dest-selection) >11:
+                    self.PionMange(dest, self.pions_b, self.dame_n, selection)
+                    self.noir+=1
+                else:
+                    self.deplacementDameNoir(dest, selection)
+
+            print(self.dame_n)
+            print(self.dame_b)
+            print(self.pions_n)
+            print(self.pions_b)
+            return True
+        else:
+            return False
