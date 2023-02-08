@@ -39,7 +39,6 @@ class pionsEmplacements():
                 j * case, i * case, (j * case) + case, (i * case) + case, fill='darkmagenta')) for j in range(10)] for i in
          range(10)]
 
-
     def place_pions(self):
         # on marque les scores
 
