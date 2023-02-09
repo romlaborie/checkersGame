@@ -25,9 +25,10 @@ class JeuDeDame():
             self.emplacementGrille.place_pions()
             self.Joueur = self.emplacementGrille.ordiDebute
             self.selected = -1
-            self.emplacementGrille.CasesToPlateau()
             self.nb_tours+=1
+            self.plateau = self.emplacementGrille.CasesToPlateau()
             print("tour==========", self.nb_tours)
+            print(self.plateau)
             return self.emplacementGrille.can1.bind("<Button-1>", self.select)
 
     def select(self, event, case = 40):
@@ -59,7 +60,8 @@ class JeuDeDame():
                 deplacement_pion = (initial_position, self.emplacementGrille.cases_noires.index(num_case)+1)
                 print(deplacement_pion)
                 self.emplacementGrille.PlateauToCases(deplacement_pion)
-                self.emplacementGrille.CasesToPlateau()
+                self.plateau = self.emplacementGrille.CasesToPlateau()
+                print("JEU FAIT===========", self.plateau)
                 self.emplacementGrille.damier_trace()
                 self.emplacementGrille.place_pions()
                 self.Joueur = 1-self.emplacementGrille.ordiDebute
@@ -86,6 +88,10 @@ class JeuDeDame():
 
             self.emplacementGrille.txt1.configure(text='Noirs gagnent')
             self.emplacementGrille.fenetre.destroy()
+
+        if self.nb_tours==1000:
+            self.emplacementGrille.fenetre.destroy()
+
 
 
         self.emplacementGrille.damier_trace()

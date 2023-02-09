@@ -92,13 +92,16 @@ class AI():
 
     def CheckAttaquePossibleBlanc(self, plateau, dest, coordAttaque):
 
+        print("Attaque", coordAttaque)
+        print("plateau attaque", plateau[coordAttaque])
         if self.case_libre(plateau, dest) and plateau[coordAttaque][0]==1:
             self.pos.append(dest)
             self.prenable.append(dest)
             self.prenable.append(coordAttaque)
 
     def CheckAttaquePossibleNoir(self, plateau, dest, coordAttaque):
-
+        print(coordAttaque)
+        print(plateau[coordAttaque])
         if self.case_libre(plateau, dest) and plateau[coordAttaque][0]==0:
             self.pos.append(dest)
             self.prenable.append(dest)

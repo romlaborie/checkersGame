@@ -70,9 +70,7 @@ class pionsEmplacements():
     def CasesToPlateau(self):
 
         plateau=[None]*51
-        # plateau.extend([(1,False) for k in range(20)])
-        # plateau.extend([None for p in range(10)])
-        # plateau.extend([(0,False) for k in range(20)])
+
         for k in range(50):
             print(k)
             if self.cases_noires[k] in self.dame_blanches:
@@ -112,6 +110,7 @@ class pionsEmplacements():
                     else :
 
                         self.pions_blancs.remove(self.cases_noires[min(TupleMouvement)+4-1])
+                    self.noirScore+=1
                 elif abs(TupleMouvement[1]-TupleMouvement[0])==11 :
                     if (TupleMouvement[0]-1)%10 < 5 :
 
@@ -119,6 +118,8 @@ class pionsEmplacements():
                     else :
 
                         self.pions_blancs.remove(self.cases_noires[min(TupleMouvement)+5-1])
+
+                    self.noirScore+=1
                 if TupleMouvement[1] <= 5:
                     if self.cases_noires[TupleMouvement[0] - 1] in self.dame_blanches:
 
@@ -144,6 +145,8 @@ class pionsEmplacements():
                     else :
 
                         self.pions_noirs.remove(self.cases_noires[min(TupleMouvement)+4-1])
+
+                    self.blancScore+=1
                 elif abs(TupleMouvement[1]-TupleMouvement[0])==11 :
                     if (TupleMouvement[0]-1)%10 < 5 :
 
@@ -151,6 +154,8 @@ class pionsEmplacements():
                     else :
 
                         self.pions_noirs.remove(self.cases_noires[min(TupleMouvement)+5-1])
+
+                    self.blancScore+=1
                 # si difference trop elevee.... on remove un pion blanc...
                 if TupleMouvement[1]>=46:
 
@@ -180,6 +185,8 @@ class pionsEmplacements():
                     else:
 
                         self.pions_blancs.remove(self.cases_noires[min(TupleMouvement) + 4 - 1])
+
+                    self.noirScore+=1
                 elif abs(TupleMouvement[1] - TupleMouvement[0]) == 11:
                     if (TupleMouvement[0] - 1) % 10 < 5:
 
@@ -187,6 +194,8 @@ class pionsEmplacements():
                     else:
 
                         self.pions_blancs.remove(self.cases_noires[min(TupleMouvement) + 5 - 1])
+
+                    self.noirScore+=1
                 if TupleMouvement[1] <= 5:
                     if self.cases_noires[TupleMouvement[0] - 1] in self.dame_blanches:
 
@@ -212,6 +221,7 @@ class pionsEmplacements():
                     else:
 
                         self.pions_noirs.remove(self.cases_noires[min(TupleMouvement) + 4 - 1])
+                    self.blancScore+=1
                 elif abs(TupleMouvement[1] - TupleMouvement[0]) == 11:
                     if (TupleMouvement[0] - 1) % 10 < 5:
 
@@ -219,6 +229,7 @@ class pionsEmplacements():
                     else:
 
                         self.pions_noirs.remove(self.cases_noires[min(TupleMouvement) + 5 - 1])
+                    self.blancScore+=1
                 # si difference trop elevee.... on remove un pion blanc...
                 if TupleMouvement[1] >= 46:
 
