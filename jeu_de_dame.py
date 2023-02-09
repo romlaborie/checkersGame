@@ -22,7 +22,7 @@ class JeuDeDame():
 
             self.emplacementGrille.PlateauToCases()
 
-            self.Joueur = 1 - self.ordiJoueur.joueur_IA
+            self.Joueur = 1 - self.emplacementGrille.ordiDebute
             self.selected = -1
 
             self.nb_tours+=1
@@ -38,17 +38,17 @@ class JeuDeDame():
         print(num_case)
         pions = self.emplacementGrille.pions_blancs if self.Joueur == 1 else self.emplacementGrille.pions_noirs
 
-        if self.Joueur == self.ordiJoueur.joueur_IA:
+        if self.Joueur == 1-self.emplacementGrille.ordiDebute:
             return self.appelIA()
 
-        if self.Joueur!=self.ordiJoueur.joueur_IA and self.selected == -1:
+        if self.Joueur!=1-self.emplacementGrille.ordiDebute and self.selected == -1:
             if num_case in pions:
                 self.selected = num_case
             print("coucou", self.emplacementGrille.cases_noires.index(num_case)+1)
             self.ordiJoueur.possibilitees(self.plateau, self.emplacementGrille.cases_noires.index(num_case)+1)
             print("DAME.....", self.emplacementGrille.dame_noires, self.emplacementGrille.dame_blanches)
         print(self.selected)
-        if self.Joueur!=self.ordiJoueur.joueur_IA :
+        if self.Joueur!=1-self.emplacementGrille.ordiDebute :
 
             print("dest = ", num_case)
             print(self.ordiJoueur.pos)
@@ -60,7 +60,7 @@ class JeuDeDame():
                 self.emplacementGrille.PlateauToCases(deplacement_pion)
                 self.emplacementGrille.damier_trace()
                 self.emplacementGrille.place_pions()
-                self.Joueur = self.ordiJoueur.joueur_IA
+                self.Joueur = 1-self.emplacementGrille.ordiDebute
                 return self.appelIA()
 
     def interface(self):

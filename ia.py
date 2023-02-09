@@ -7,7 +7,6 @@ class AI():
         self.pos = list()
         self.prenable = list()
         self.pionsAPrendre=list()
-        self.joueur_IA=0
         self.case =40
         self.moves_possible = list()
         self.pionsABouger = list()
@@ -17,7 +16,7 @@ class AI():
         listeRetour = list()
         for i in range(1, len(plateau)):
 
-            if plateau[i] != None and plateau[i][0]==joueur:
+            if type(plateau[i]) == type(tuple()) and plateau[i][0]==joueur:
                 print(plateau)
                 self.moves_possible = self.possibilitees(plateau, i)
 
@@ -36,12 +35,12 @@ class AI():
 
     def play(self, plateau, premier_joueur):
 
-        self.joueur_IA = 0 if premier_joueur==True else 1
+        joueur_IA = 0 if premier_joueur==True else 1
 
         #gestion aleatoire
         #self.choix = appel à cherchePionAdeplacer
 
-        listeDeCasesPossibles = self.CherchePionsADeplacer(plateau, self.joueur_IA)
+        listeDeCasesPossibles = self.CherchePionsADeplacer(plateau, joueur_IA)
 
         print(self.pionsABouger)
         i = random.randint(0, len(self.pionsABouger)-1)
@@ -107,7 +106,7 @@ class AI():
 
     def case_libre(self, plateau, c):
 
-        if c>0 and plateau[c]==None:
+        if c>0 and type(plateau[c])!=type(tuple()):
 
             return True
         else :

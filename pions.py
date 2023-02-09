@@ -98,72 +98,140 @@ class pionsEmplacements():
         #Appel au tuple de l'IA
         if TupleMouvement == (None, None) :
             TupleMouvement = self.automatique.play(self.CasesToPlateau(), self.ordiDebute)
-        if self.ordiDebute==0:
-            print(self.cases_noires[TupleMouvement[0]-1])
-            print(self.cases_noires[TupleMouvement[1] - 1])
-            self.pions_noirs.remove(self.cases_noires[TupleMouvement[0]-1])
-            self.pions_noirs.append(self.cases_noires[TupleMouvement[1]-1])
+            if self.ordiDebute==0:
+                print(self.cases_noires[TupleMouvement[0]-1])
+                print(self.cases_noires[TupleMouvement[1] - 1])
+                self.pions_noirs.remove(self.cases_noires[TupleMouvement[0]-1])
+                self.pions_noirs.append(self.cases_noires[TupleMouvement[1]-1])
 
-            if abs(TupleMouvement[1]-TupleMouvement[0])==9 :
-                if (TupleMouvement[0]-1)%10 < 5 :
+                if abs(TupleMouvement[1]-TupleMouvement[0])==9 :
+                    if (TupleMouvement[0]-1)%10 < 5 :
 
-                    self.pions_blancs.remove(self.cases_noires[max(TupleMouvement)-4-1])
-                else :
+                        self.pions_blancs.remove(self.cases_noires[max(TupleMouvement)-4-1])
+                    else :
 
-                    self.pions_blancs.remove(self.cases_noires[min(TupleMouvement)+4-1])
-            elif abs(TupleMouvement[1]-TupleMouvement[0])==11 :
-                if (TupleMouvement[0]-1)%10 < 5 :
+                        self.pions_blancs.remove(self.cases_noires[min(TupleMouvement)+4-1])
+                elif abs(TupleMouvement[1]-TupleMouvement[0])==11 :
+                    if (TupleMouvement[0]-1)%10 < 5 :
 
-                    self.pions_blancs.remove(self.cases_noires[max(TupleMouvement)-5-1])
-                else :
+                        self.pions_blancs.remove(self.cases_noires[max(TupleMouvement)-5-1])
+                    else :
 
-                    self.pions_blancs.remove(self.cases_noires[min(TupleMouvement)+5-1])
-            if TupleMouvement[1] <= 5:
-                if self.cases_noires[TupleMouvement[0] - 1] in self.dame_blanches:
+                        self.pions_blancs.remove(self.cases_noires[min(TupleMouvement)+5-1])
+                if TupleMouvement[1] <= 5:
+                    if self.cases_noires[TupleMouvement[0] - 1] in self.dame_blanches:
+
+                        self.dame_noires.remove(self.cases_noires[TupleMouvement[0] - 1])
+                        self.dame_noires.append(self.cases_noires[TupleMouvement[1] - 1])
+                    else:
+                        self.creationDameNoire(self.cases_noires[TupleMouvement[1] - 1])
+
+                elif self.cases_noires[TupleMouvement[0] - 1] in self.dame_blanches:
 
                     self.dame_noires.remove(self.cases_noires[TupleMouvement[0] - 1])
                     self.dame_noires.append(self.cases_noires[TupleMouvement[1] - 1])
-                else:
-                    self.creationDameNoire(self.cases_noires[TupleMouvement[1] - 1])
 
-            elif self.cases_noires[TupleMouvement[0] - 1] in self.dame_blanches:
+                # ajout des dames si la dame n'existe pas et si on est au bord du tableau (l'une des 5 premieres appartient à self.blancs)
+            else :
 
-                self.dame_noires.remove(self.cases_noires[TupleMouvement[0] - 1])
-                self.dame_noires.append(self.cases_noires[TupleMouvement[1] - 1])
+                self.pions_blancs.remove(self.cases_noires[TupleMouvement[0]-1])
+                self.pions_blancs.append(self.cases_noires[TupleMouvement[1]-1])
+                if abs(TupleMouvement[1]-TupleMouvement[0])==9 :
+                    if (TupleMouvement[0]-1)%10 < 5 :
 
-            # ajout des dames si la dame n'existe pas et si on est au bord du tableau (l'une des 5 premieres appartient à self.blancs)
+                        self.pions_noirs.remove(self.cases_noires[max(TupleMouvement)-4-1])
+                    else :
+
+                        self.pions_noirs.remove(self.cases_noires[min(TupleMouvement)+4-1])
+                elif abs(TupleMouvement[1]-TupleMouvement[0])==11 :
+                    if (TupleMouvement[0]-1)%10 < 5 :
+
+                        self.pions_noirs.remove(self.cases_noires[max(TupleMouvement)-5-1])
+                    else :
+
+                        self.pions_noirs.remove(self.cases_noires[min(TupleMouvement)+5-1])
+                # si difference trop elevee.... on remove un pion blanc...
+                if TupleMouvement[1]>=46:
+
+                    if self.cases_noires[TupleMouvement[0] - 1] in self.dame_noires:
+
+                        self.dame_blanches.remove(self.cases_noires[TupleMouvement[0]-1])
+                        self.dame_blanches.append(self.cases_noires[TupleMouvement[1]-1])
+                    else:
+                        self.creationDameBlanche(self.cases_noires[TupleMouvement[1]-1])
+
+                elif self.cases_noires[TupleMouvement[0] - 1] in self.dame_noires:
+
+                    self.dame_blanches.remove(self.cases_noires[TupleMouvement[0] - 1])
+                    self.dame_blanches.append(self.cases_noires[TupleMouvement[1] - 1])
+
         else :
+            if self.ordiDebute == 1:
+                print(self.cases_noires[TupleMouvement[0] - 1])
+                print(self.cases_noires[TupleMouvement[1] - 1])
+                self.pions_noirs.remove(self.cases_noires[TupleMouvement[0] - 1])
+                self.pions_noirs.append(self.cases_noires[TupleMouvement[1] - 1])
 
-            self.pions_blancs.remove(self.cases_noires[TupleMouvement[0]-1])
-            self.pions_blancs.append(self.cases_noires[TupleMouvement[1]-1])
-            if abs(TupleMouvement[1]-TupleMouvement[0])==9 :
-                if (TupleMouvement[0]-1)%10 < 5 :
+                if abs(TupleMouvement[1] - TupleMouvement[0]) == 9:
+                    if (TupleMouvement[0] - 1) % 10 < 5:
 
-                    self.pions_noirs.remove(self.cases_noires[max(TupleMouvement)-4-1])
-                else :
+                        self.pions_blancs.remove(self.cases_noires[max(TupleMouvement) - 4 - 1])
+                    else:
 
-                    self.pions_noirs.remove(self.cases_noires[min(TupleMouvement)+4-1])
-            elif abs(TupleMouvement[1]-TupleMouvement[0])==11 :
-                if (TupleMouvement[0]-1)%10 < 5 :
+                        self.pions_blancs.remove(self.cases_noires[min(TupleMouvement) + 4 - 1])
+                elif abs(TupleMouvement[1] - TupleMouvement[0]) == 11:
+                    if (TupleMouvement[0] - 1) % 10 < 5:
 
-                    self.pions_noirs.remove(self.cases_noires[max(TupleMouvement)-5-1])
-                else :
+                        self.pions_blancs.remove(self.cases_noires[max(TupleMouvement) - 5 - 1])
+                    else:
 
-                    self.pions_noirs.remove(self.cases_noires[min(TupleMouvement)+5-1])
-            # si difference trop elevee.... on remove un pion blanc...
-            if TupleMouvement[1]>=46:
+                        self.pions_blancs.remove(self.cases_noires[min(TupleMouvement) + 5 - 1])
+                if TupleMouvement[1] <= 5:
+                    if self.cases_noires[TupleMouvement[0] - 1] in self.dame_blanches:
 
-                if self.cases_noires[TupleMouvement[0] - 1] in self.dame_noires:
+                        self.dame_noires.remove(self.cases_noires[TupleMouvement[0] - 1])
+                        self.dame_noires.append(self.cases_noires[TupleMouvement[1] - 1])
+                    else:
+                        self.creationDameNoire(self.cases_noires[TupleMouvement[1] - 1])
 
-                    self.dame_blanches.remove(self.cases_noires[TupleMouvement[0]-1])
-                    self.dame_blanches.append(self.cases_noires[TupleMouvement[1]-1])
-                else:
-                    self.creationDameBlanche(self.cases_noires[TupleMouvement[1]-1])
+                elif self.cases_noires[TupleMouvement[0] - 1] in self.dame_blanches:
 
-            elif self.cases_noires[TupleMouvement[0] - 1] in self.dame_noires:
+                    self.dame_noires.remove(self.cases_noires[TupleMouvement[0] - 1])
+                    self.dame_noires.append(self.cases_noires[TupleMouvement[1] - 1])
 
-                self.dame_blanches.remove(self.cases_noires[TupleMouvement[0] - 1])
-                self.dame_blanches.append(self.cases_noires[TupleMouvement[1] - 1])
+                # ajout des dames si la dame n'existe pas et si on est au bord du tableau (l'une des 5 premieres appartient à self.blancs)
+            else:
+
+                self.pions_blancs.remove(self.cases_noires[TupleMouvement[0] - 1])
+                self.pions_blancs.append(self.cases_noires[TupleMouvement[1] - 1])
+                if abs(TupleMouvement[1] - TupleMouvement[0]) == 9:
+                    if (TupleMouvement[0] - 1) % 10 < 5:
+
+                        self.pions_noirs.remove(self.cases_noires[max(TupleMouvement) - 4 - 1])
+                    else:
+
+                        self.pions_noirs.remove(self.cases_noires[min(TupleMouvement) + 4 - 1])
+                elif abs(TupleMouvement[1] - TupleMouvement[0]) == 11:
+                    if (TupleMouvement[0] - 1) % 10 < 5:
+
+                        self.pions_noirs.remove(self.cases_noires[max(TupleMouvement) - 5 - 1])
+                    else:
+
+                        self.pions_noirs.remove(self.cases_noires[min(TupleMouvement) + 5 - 1])
+                # si difference trop elevee.... on remove un pion blanc...
+                if TupleMouvement[1] >= 46:
+
+                    if self.cases_noires[TupleMouvement[0] - 1] in self.dame_noires:
+
+                        self.dame_blanches.remove(self.cases_noires[TupleMouvement[0] - 1])
+                        self.dame_blanches.append(self.cases_noires[TupleMouvement[1] - 1])
+                    else:
+                        self.creationDameBlanche(self.cases_noires[TupleMouvement[1] - 1])
+
+                elif self.cases_noires[TupleMouvement[0] - 1] in self.dame_noires:
+
+                    self.dame_blanches.remove(self.cases_noires[TupleMouvement[0] - 1])
+                    self.dame_blanches.append(self.cases_noires[TupleMouvement[1] - 1])
             self.damier_trace()
             self.place_pions()
 
