@@ -69,10 +69,10 @@ class pionsEmplacements():
 
     def CasesToPlateau(self):
 
-        plateau=[None]
-        plateau.extend([(1,False) for k in range(20)])
-        plateau.extend([None for p in range(10)])
-        plateau.extend([(0,False) for k in range(20)])
+        plateau=[None]*51
+        # plateau.extend([(1,False) for k in range(20)])
+        # plateau.extend([None for p in range(10)])
+        # plateau.extend([(0,False) for k in range(20)])
         for k in range(50):
             print(k)
             if self.cases_noires[k] in self.dame_blanches:

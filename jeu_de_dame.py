@@ -25,7 +25,7 @@ class JeuDeDame():
             self.emplacementGrille.place_pions()
             self.Joueur = self.emplacementGrille.ordiDebute
             self.selected = -1
-
+            self.emplacementGrille.CasesToPlateau()
             self.nb_tours+=1
             print("tour==========", self.nb_tours)
             return self.emplacementGrille.can1.bind("<Button-1>", self.select)
@@ -59,6 +59,7 @@ class JeuDeDame():
                 deplacement_pion = (initial_position, self.emplacementGrille.cases_noires.index(num_case)+1)
                 print(deplacement_pion)
                 self.emplacementGrille.PlateauToCases(deplacement_pion)
+                self.emplacementGrille.CasesToPlateau()
                 self.emplacementGrille.damier_trace()
                 self.emplacementGrille.place_pions()
                 self.Joueur = 1-self.emplacementGrille.ordiDebute
