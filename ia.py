@@ -54,7 +54,7 @@ class AI():
         if selection%10 == 5 and plateau[selection][0]==1:
             if not self.case_libre(plateau, min(self.moves_possible)):
                 move = 4+min(self.moves_possible)
-            elif self.case_libre(plateau, min(self.moves_possible)) :
+            elif self.case_libre(plateau, min(self.moves_possible)):
                 move = min(self.moves_possible)
 
         elif selection%10 == 6 and plateau[selection][0]==1:
@@ -122,14 +122,14 @@ class AI():
         if (num_selected-1)%10>=5:
 
             if plateau[num_selected][1]==True and plateau[num_selected][0]==1:
-
-                c = num_selected + 4
-                print(c)
-                if self.case_libre(plateau,c):
-                    self.pos.append(c)
-                else:
-                    c2 = c + 5
-                    self.CheckAttaquePossibleNoir(plateau, c2, c)
+                if num_selected % 10 != 6:
+                    c = num_selected + 4
+                    print(c)
+                    if self.case_libre(plateau,c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c + 5
+                        self.CheckAttaquePossibleNoir(plateau, c2, c)
 
                 c = num_selected - 5
                 print(c)
@@ -146,22 +146,23 @@ class AI():
                 else:
                     c2 = c + 6
                     self.CheckAttaquePossibleNoir(plateau, c2, c)
-                c = num_selected - 6
-                print(c)
-                if self.case_libre(plateau,c):
-                    self.pos.append(c)
-                else:
-                    c2 = c - 5
-                    self.CheckAttaquePossibleNoir(plateau, c2, c)
+                if num_selected % 10 != 6:
+                    c = num_selected - 6
+                    print(c)
+                    if self.case_libre(plateau,c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c - 5
+                        self.CheckAttaquePossibleNoir(plateau, c2, c)
             elif plateau[num_selected][1]==False and plateau[num_selected][0]==1:
-
-                c = num_selected + 4
-                print(c)
-                if self.case_libre(plateau,c):
-                    self.pos.append(c)
-                else:
-                    c2 = c + 5
-                    self.CheckAttaquePossibleNoir(plateau, c2, c)
+                if num_selected % 10 != 6:
+                    c = num_selected + 4
+                    print(c)
+                    if self.case_libre(plateau,c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c + 5
+                        self.CheckAttaquePossibleNoir(plateau, c2, c)
                 c = num_selected - 5
                 c2 = c - 4
                 self.CheckAttaquePossibleNoir(plateau, c2, c)
@@ -173,11 +174,13 @@ class AI():
                 else:
                     c2 = c + 6
                     self.CheckAttaquePossibleNoir(plateau, c2, c)
-                c = num_selected - 6
-                c2 = c - 5
-                self.CheckAttaquePossibleNoir(plateau, c2, c)
+                if num_selected % 10 != 6:
+                    c = num_selected - 6
+                    c2 = c - 5
+                    self.CheckAttaquePossibleNoir(plateau, c2, c)
 
             elif plateau[num_selected][1]==True and plateau[num_selected][0]==0:
+
                 c = num_selected - 5
                 print(c)
                 if self.case_libre(plateau, c):
@@ -185,13 +188,13 @@ class AI():
                 else:
                     c2 = c - 4
                     self.CheckAttaquePossibleBlanc(plateau, c2, c)
-
-                c = num_selected + 4
-                if self.case_libre(plateau, c):
-                    self.pos.append(c)
-                else:
-                    c2 = c + 5
-                    self.CheckAttaquePossibleBlanc(plateau, c2, c)
+                if num_selected % 10 != 6:
+                    c = num_selected + 4
+                    if self.case_libre(plateau, c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c + 5
+                        self.CheckAttaquePossibleBlanc(plateau, c2, c)
 
                 c = num_selected + 5
                 print(c)
@@ -200,12 +203,13 @@ class AI():
                 else:
                     c2 = c + 6
                     self.CheckAttaquePossibleBlanc(plateau, c2, c)
-                c = num_selected -6
-                if self.case_libre(plateau,c):
-                    self.pos.append(c)
-                else:
-                    c2 = c - 5
-                    self.CheckAttaquePossibleBlanc(plateau, c2, c)
+                if num_selected % 10 != 6:
+                    c = num_selected -6
+                    if self.case_libre(plateau,c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c - 5
+                        self.CheckAttaquePossibleBlanc(plateau, c2, c)
             elif plateau[num_selected][1]==False and plateau[num_selected][0]==0:
                 c = num_selected - 5
                 print(c)
@@ -214,19 +218,20 @@ class AI():
                 else:
                     c2 = c - 4
                     self.CheckAttaquePossibleBlanc(plateau, c2, c)
-                c = num_selected + 4
-                c2 = c + 5
-                print(c)
-                self.CheckAttaquePossibleBlanc(plateau, c2, c)
-                c = num_selected - 5
-                print(c)
-                if self.case_libre(plateau, c):
-                    self.pos.append(c)
-                else:
-                    c2 = c - 6
+                if num_selected % 10 != 6:
+                    c = num_selected + 4
+                    c2 = c + 5
+                    print(c)
                     self.CheckAttaquePossibleBlanc(plateau, c2, c)
-                c = num_selected + 6
-                c2 = c + 5
+                    c = num_selected - 6
+                    print(c)
+                    if self.case_libre(plateau, c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c - 5
+                        self.CheckAttaquePossibleBlanc(plateau, c2, c)
+                c = num_selected + 5
+                c2 = c + 6
                 print(c)
                 self.CheckAttaquePossibleBlanc(plateau, c2, c)
 
@@ -240,22 +245,22 @@ class AI():
                 else:
                     c2 = c + 4
                     self.CheckAttaquePossibleNoir(plateau, c2, c)
+                if num_selected % 10 != 5 :
+                    c = num_selected - 4
+                    print(c)
+                    if self.case_libre(plateau, c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c - 5
+                        self.CheckAttaquePossibleNoir(plateau, c2, c)
 
-                c = num_selected - 4
-                print(c)
-                if self.case_libre(plateau, c):
-                    self.pos.append(c)
-                else:
-                    c2 = c - 5
-                    self.CheckAttaquePossibleNoir(plateau, c2, c)
-
-                c = num_selected + 6
-                print(c)
-                if self.case_libre(plateau, c):
-                    self.pos.append(c)
-                else:
-                    c2 = c + 5
-                    self.CheckAttaquePossibleNoir(plateau, c2, c)
+                    c = num_selected + 6
+                    print(c)
+                    if self.case_libre(plateau, c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c + 5
+                        self.CheckAttaquePossibleNoir(plateau, c2, c)
                 c = num_selected - 5
                 print(c)
                 if self.case_libre(plateau, c):
@@ -272,29 +277,33 @@ class AI():
                 else:
                     c2 = c + 4
                     self.CheckAttaquePossibleNoir(plateau, c2, c)
-                c = num_selected - 4
-                c2 = c - 5
-                self.CheckAttaquePossibleNoir(plateau, c2, c)
-
-                c = num_selected + 6
-                print(c)
-                if self.case_libre(plateau, c):
-                    self.pos.append(c)
-                else:
-                    c2 = c + 5
+                if num_selected % 10 != 5 :
+                    c = num_selected - 4
+                    c2 = c - 5
                     self.CheckAttaquePossibleNoir(plateau, c2, c)
+
+                    c = num_selected + 6
+                    print(c)
+                    if self.case_libre(plateau, c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c + 5
+                        self.CheckAttaquePossibleNoir(plateau, c2, c)
                 c = num_selected - 5
                 c2 = c - 6
                 self.CheckAttaquePossibleNoir(plateau, c2, c)
 
+
+
             elif plateau[num_selected][1] == True and plateau[num_selected][0] == 0:
-                c = num_selected - 4
-                print(c)
-                if self.case_libre(plateau, c):
-                    self.pos.append(c)
-                else:
-                    c2 = c - 5
-                    self.CheckAttaquePossibleBlanc(plateau, c2, c)
+                if num_selected % 10 != 5 :
+                    c = num_selected - 4
+                    print(c)
+                    if self.case_libre(plateau, c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c - 5
+                        self.CheckAttaquePossibleBlanc(plateau, c2, c)
 
                 c = num_selected + 5
                 if self.case_libre(plateau, c):
@@ -302,14 +311,14 @@ class AI():
                 else:
                     c2 = c + 4
                     self.CheckAttaquePossibleBlanc(plateau, c2, c)
-
-                c = num_selected + 6
-                print(c)
-                if self.case_libre(plateau, c):
-                    self.pos.append(c)
-                else:
-                    c2 = c + 5
-                    self.CheckAttaquePossibleBlanc(plateau, c2, c)
+                if num_selected % 10 != 5:
+                    c = num_selected + 6
+                    print(c)
+                    if self.case_libre(plateau, c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c + 5
+                        self.CheckAttaquePossibleBlanc(plateau, c2, c)
                 c = num_selected - 5
                 if self.case_libre(plateau, c):
                     self.pos.append(c)
@@ -317,13 +326,14 @@ class AI():
                     c2 = c - 6
                     self.CheckAttaquePossibleBlanc(plateau, c2, c)
             elif plateau[num_selected][1] == False and plateau[num_selected][0] == 0:
-                c = num_selected - 4
-                print(c)
-                if self.case_libre(plateau, c):
-                    self.pos.append(c)
-                else:
-                    c2 = c - 5
-                    self.CheckAttaquePossibleBlanc(plateau, c2, c)
+                if num_selected % 10 != 5 :
+                    c = num_selected - 4
+                    print(c)
+                    if self.case_libre(plateau, c):
+                        self.pos.append(c)
+                    else:
+                        c2 = c - 5
+                        self.CheckAttaquePossibleBlanc(plateau, c2, c)
                 c = num_selected + 5
                 c2 = c + 4
                 print(c)
@@ -335,10 +345,11 @@ class AI():
                 else:
                     c2 = c - 6
                     self.CheckAttaquePossibleBlanc(plateau, c2, c)
-                c = num_selected + 6
-                c2 = c + 5
-                print(c)
-                self.CheckAttaquePossibleBlanc(plateau, c2, c)
+                if num_selected % 10 != 5 :
+                    c = num_selected + 6
+                    c2 = c + 5
+                    print(c)
+                    self.CheckAttaquePossibleBlanc(plateau, c2, c)
         self.pionsAPrendre = list(self.prenable)
         self.prenable.extend(self.pos)
 

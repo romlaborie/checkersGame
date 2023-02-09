@@ -21,8 +21,9 @@ class JeuDeDame():
         if self.nb_tours<1000:
 
             self.emplacementGrille.PlateauToCases()
-
-            self.Joueur = 1 - self.emplacementGrille.ordiDebute
+            self.emplacementGrille.damier_trace()
+            self.emplacementGrille.place_pions()
+            self.Joueur = self.emplacementGrille.ordiDebute
             self.selected = -1
 
             self.nb_tours+=1
@@ -36,7 +37,7 @@ class JeuDeDame():
         num_case = ligne*10+colonne
         print(ligne, '\n', colonne)
         print(num_case)
-        pions = self.emplacementGrille.pions_blancs if self.Joueur == 1 else self.emplacementGrille.pions_noirs
+        pions = self.emplacementGrille.pions_blancs if self.Joueur == 0 else self.emplacementGrille.pions_noirs
 
         if self.Joueur == 1-self.emplacementGrille.ordiDebute:
             return self.appelIA()

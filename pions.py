@@ -29,6 +29,7 @@ class pionsEmplacements():
         self.dame_blanche = (0, True)
         self.automatique=ia.AI()
         self.ordiDebute = random.randint(0, 1)
+        self.ordiDebute=0 #force à ce que le vrai joueur aient les blancs
 
 
     def damier_trace(self, case=40):
