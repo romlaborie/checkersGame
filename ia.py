@@ -55,13 +55,13 @@ class AI():
         if selection%10 == 5 and plateau[selection][0]==1:
             if not self.case_libre(plateau, min(self.moves_possible)):
                 move = 4+min(self.moves_possible)
-            else :
+            elif self.case_libre(plateau, min(self.moves_possible)) :
                 move = min(self.moves_possible)
 
         elif selection%10 == 6 and plateau[selection][0]==1:
             if not self.case_libre(plateau, max(self.moves_possible)):
                 move =6 + max(self.moves_possible)
-            else:
+            elif self.case_libre(plateau, max(self.moves_possible)):
                 move = max(self.moves_possible)
 
         elif selection%10 == 5 and plateau[selection][0]==0:
