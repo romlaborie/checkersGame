@@ -1,12 +1,10 @@
 from ia import *
 from pions import *
 
-#définir le gagnant
-
 class JeuDeDame():
     def __init__(self):
 
-        self.ordiJoueur = AI()
+        self.ordiJoueur = IA()
         self.emplacementGrille = pionsEmplacements()
         self.emplacementGrille.damier_trace()
         self.emplacementGrille.place_pions()

@@ -1,6 +1,6 @@
 import random
 
-class AI():
+class IA():
 
     def __init__(self):
 
