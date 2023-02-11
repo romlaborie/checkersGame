@@ -29,6 +29,17 @@ class JeuDeDame():
             print(self.plateau)
             return self.emplacementGrille.can1.bind("<Button-1>", self.select)
 
+        if self.emplacementGrille.blancScore == 20:
+            self.emplacementGrille.txt1.configure(text='Blancs gagnent')
+            self.emplacementGrille.fenetre.destroy()
+
+        elif self.emplacementGrille.noirScore == 20:
+
+            self.emplacementGrille.txt1.configure(text='Noirs gagnent')
+            self.emplacementGrille.fenetre.destroy()
+
+        if self.nb_tours == 1000:
+            self.emplacementGrille.fenetre.destroy()
     def select(self, event, case = 40):
         # on détermine la case ou s'est passé la selection
         ligne = (event.y//case)
@@ -78,17 +89,7 @@ class JeuDeDame():
 
         print(self.emplacementGrille.ordiDebute)
         self.emplacementGrille.can1.bind("<Button-1>", self.select)
-        if self.emplacementGrille.blancScore == 20:
-            self.emplacementGrille.txt1.configure(text='Blancs gagnent')
-            self.emplacementGrille.fenetre.destroy()
 
-        elif self.emplacementGrille.noirScore==20 :
-
-            self.emplacementGrille.txt1.configure(text='Noirs gagnent')
-            self.emplacementGrille.fenetre.destroy()
-
-        if self.nb_tours==1000:
-            self.emplacementGrille.fenetre.destroy()
 
 
 
